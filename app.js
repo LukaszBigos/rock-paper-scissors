@@ -8,9 +8,16 @@ const rock_div = document.querySelector('#rock');
 const paper_div = document.querySelector('#paper');
 const scissors_div = document.querySelector('#scissors');
 
+
+const getComputerChoice = () => {
+  const choices = ['rock', 'paper', 'scissors'];
+  const compChoice = choices[ Math.floor(Math.random() * 3)];
+  return compChoice;
+};
+
 const game = (userChoice) => {
 
-}
+};
 
 const main = () => {
   rock_div.addEventListener('click', () => {
