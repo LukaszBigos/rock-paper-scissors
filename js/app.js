@@ -24,12 +24,18 @@ const winner = (user, comp) => {
 
 };
 
-const looser = () => {
-  console.log('user looses!');
+const looser = (user, comp) => {
+  computerScore++;
+  computerScore_span.innerHTML = computerScore;
+  const user_sub = 'user'.fontsize(3).sub();
+  const comp_sub = 'comp'.fontsize(3).sub();
+  result_p.innerHTML = `${user + user_sub} loses to ${comp + comp_sub}. You lost :(`;
 }
 
-const draw = () => {
-  console.log('draw !');
+const draw = (user, comp) => {
+  const user_sub = 'user'.fontsize(3).sub();
+  const comp_sub = 'comp'.fontsize(3).sub();
+  result_p.innerHTML = `${user + user_sub} equals ${comp + comp_sub}. It's a draw.`;
 }
 
 const game = (userChoice) => {
@@ -44,10 +50,10 @@ const game = (userChoice) => {
     case ('rock vs paper'):
     case ('paper vs scissors'):
     case ('scissors vs rock'):
-      looser();
+      looser(userChoice, computerChoice);
       break;
     default:
-      draw();
+      draw(userChoice, computerChoice);
       break;
   }
 };
