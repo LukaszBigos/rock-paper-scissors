@@ -8,10 +8,28 @@ const rock_div = document.querySelector('#rock');
 const paper_div = document.querySelector('#paper');
 const scissors_div = document.querySelector('#scissors');
 
+const classTaken = (user, className) => {
+  document.getElementById(user).classList.add(className);
+  setTimeout(() => document.getElementById(user).classList.remove(className), 700);
+}
+
+const colorFlash = (user, type) => {
+  switch (type) {
+    case 'winner':
+      classTaken(user ,'green-glow');
+      break;
+    case 'looser':
+      classTaken(user, 'red-glow');
+      break;
+    case 'draw':
+      classTaken(user, 'gray-glow');
+      break;
+  }
+}
 
 const getComputerChoice = () => {
   const choices = ['rock', 'paper', 'scissors'];
-  const compChoice = choices[ Math.floor(Math.random() * 3)];
+  const compChoice = choices[Math.floor(Math.random() * 3)];
   return compChoice;
 };
 
@@ -21,7 +39,7 @@ const winner = (user, comp) => {
   const user_sub = 'user'.fontsize(3).sub();
   const comp_sub = 'comp'.fontsize(3).sub();
   result_p.innerHTML = `${user + user_sub} beats ${comp + comp_sub} You win :)`;
-
+  colorFlash(user, 'winner');
 };
 
 const looser = (user, comp) => {
@@ -30,18 +48,20 @@ const looser = (user, comp) => {
   const user_sub = 'user'.fontsize(3).sub();
   const comp_sub = 'comp'.fontsize(3).sub();
   result_p.innerHTML = `${user + user_sub} loses to ${comp + comp_sub}. You lost :(`;
+  colorFlash(user, 'looser');
 }
 
 const draw = (user, comp) => {
   const user_sub = 'user'.fontsize(3).sub();
   const comp_sub = 'comp'.fontsize(3).sub();
   result_p.innerHTML = `${user + user_sub} equals ${comp + comp_sub}. It's a draw.`;
+  colorFlash(user, 'draw');
 }
 
 const game = (userChoice) => {
   const computerChoice = getComputerChoice();
 
-  switch(`${userChoice} vs ${computerChoice}`) {
+  switch (`${userChoice} vs ${computerChoice}`) {
     case ('rock vs scissors'):
     case ('paper vs rock'):
     case ('scissors vs paper'):
